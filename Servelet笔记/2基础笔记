@@ -1,0 +1,80 @@
+1 web的java资源部分，IDEA在写以下代码时候需要添加相关的tomcat依赖，这样才能引入相关的包
+
+package com.zhenghang;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+//servlet开发流程
+//1.创建javaWeb项目，同时将tomcat添加为当前项目的依赖
+//2重写service方法 service(HttpServletRequest req, HttpServletResponse resp)
+//3在service方法中定义业务处理代码
+//4在web.xml中配置Servelt对象的请求路径
+
+public class servlet extends HttpServlet {
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //1 从request对象中获取请求中的任何信息 （已username为例）
+        String username = req.getParameter("username");//获取请求中的参数，无论是在 url后还是在请求体中
+        String[] usernames = req.getParameterValues("username");//另外一种方式，可以接纳多值的参数
+        //2处理业务的代码
+        String info = "Yes";
+        if(!username.equals("zhenghang")){
+            info = "No";
+        }
+        //3将要响应的代码
+        PrintWriter writer = resp.getWriter();
+        writer.write(info);
+
+    }
+}
+
+2.以配置web.xml的方式指明sevlet资源请求路径（以后有通过注解的方式的实现的，但是这个是最基础的）
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+<!--
+1 配置Servelet类，并且起一个别名
+-->
+    <servlet>
+        <servlet-name>iszhenghanguusr</servlet-name>
+        <servlet-class>com.zhenghang.servlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>iszhenghanguusr</servlet-name>
+        <url-pattern>/iszhenghangCheck</url-pattern>
+    </servlet-mapping>
+</web-app>
+
+3.前端form表单请求sevlet调用案例
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+</head>
+<body>
+
+<!--
+    http://127.0.0.1:8080/demo01/servlet
+
+    请求体 username：value
+-->
+  <form method="get" action="iszhenghangCheck">
+    用户名 ：<input type="text" name="username"> br
+    <input type="submit" value="校验">
+  </form>
+
+</body>
+</html>

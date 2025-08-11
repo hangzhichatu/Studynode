@@ -1,0 +1,8 @@
+1关于依赖的作用域关键词解析
+    Provided 表示该依赖只是编译的时候需要，打包发布的时候不需要  在服务器环境中，由服务软件 Tomcat提供
+2 Context-Type 响应头的问题
+    MIME类型响应头  媒体类型，文件类型，响应的数据类型  
+    MIME类型用于告诉客户端响应的数据类型是什么类型的数据
+
+    在response对象返回值的时候，可以在其对象上设置返回值的类型 如这样的  resp.setHeader("Content-Type","text/html");或者
+    resp.setContentType("text/html"); 也能设置返回值的类型

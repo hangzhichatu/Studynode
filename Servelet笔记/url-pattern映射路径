@@ -1,0 +1,27 @@
+配置如下 <servlet>
+        <servlet-name>iszhenghanguusr</servlet-name>
+        <servlet-class>com.zhenghang.servlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>testUrlParttern</servlet-name>
+        <servlet-class>com.zhenghang.servlet1</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>iszhenghanguusr</servlet-name>
+        <url-pattern>/iszhenghangCheck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>testUrlParttern</servlet-name>
+        <url-pattern>/testService1</url-pattern>
+    </servlet-mapping>
+    在这些配置中一个servlet标签可以对于多个serlet-mapping标签 ，一个serlet-mapping标签标签也可以对应多个<url-pattern></url-pattern>
+
+    精确匹配和模糊匹配
+    /具体路径
+    模糊匹配  * 是通配符
+    / 匹配全部 不包括JSP
+    /* 匹配全部 包括JSP
+    /a/*  匹配前缀，后缀模糊
+    *.action 匹配后缀 
