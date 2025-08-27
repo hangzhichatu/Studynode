@@ -1,0 +1,20 @@
+新建java项目 ，选择Maven新建项目
+在项目pom.xml中增加JDBC的jar包依赖
+
+<dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+    </dependencies>
+
+等IDEA集成开发平台将相关依赖下载完成后，完成开始准备
+
+数据库方面 ，新建了一个库，一张表，一个用于数据库的账户， 创建的语句如下：
+
+-- 在 mysql> 命令行中执行
+CREATE DATABASE mydb; -- 创建一个名为 mydb 的数据库
+CREATE USER 'learner'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON mydb.* TO 'learner'@'localhost';
+FLUSH PRIVILEGES;

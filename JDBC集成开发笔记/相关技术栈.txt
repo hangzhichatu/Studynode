@@ -1,0 +1,4 @@
+依赖管理 MAVEN
+数据库 MySql
+项目管理 git
+集成开发平台 IDEA
